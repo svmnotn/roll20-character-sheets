@@ -22,6 +22,7 @@
 		psionic: ["biopsionics", "metapsionics", "precognition", "telekinesis", "telepathy", "teleportation"],
 		magic: ["know_magic", "use_magic", "sunblade"],
 		wwn: ["administer", "connect", "convince", "craft", "exert", "heal", "know", "lead", "magic", "notice", "perform", "pray", "punch", "ride", "sail", "shoot", "sneak", "stab", "survive", "trade", "work"],
+		cwn: ["administer", "connect", "drive", "exert", "fix", "heal", "know", "lead", "notice", "perform", "program", "punch", "shoot", "sneak", "stab", "survive", "talk", "trade", "work"],
 	};
 
 //- We have foci in two locations, so they are outsourced to this mixin
@@ -308,6 +309,10 @@ input(type="hidden", name="attr_setting_transhuman_enable", value="").transhuman
 							option.skills-wwn(value="@{skill_shoot}", data-i18n="SHOOT", selected)
 							option.skills-wwn(value="@{skill_stab}", data-i18n="STAB")
 							option.skills-wwn(value="@{skill_magic}", data-i18n="MAGIC")
+							option.skills-cwn(value="@{skill_exert}", data-i18n="EXERT")
+							option.skills-cwn(value="@{skill_punch}", data-i18n="PUNCH")
+							option.skills-cwn(value="@{skill_shoot}", data-i18n="SHOOT", selected)
+							option.skills-cwn(value="@{skill_stab}", data-i18n="STAB")
 							option.skills-first(value="@{skill_combat_energy}", data-i18n="COMBAT_ENERGY")
 							option.skills-first(value="@{skill_combat_gunnery}", data-i18n="COMBAT_GUNNERY")
 							option.skills-first(value="@{skill_combat_primitive}", data-i18n="COMBAT_PRIMITIVE")
@@ -641,6 +646,16 @@ input(type="hidden", name="attr_setting_transhuman_enable", value="").transhuman
 						input(type="number", min="0", value="0", name="attr_unspent_skill_points").level
 			.skills-wwn.skill-container(data-i18n-list="SKILL_ORDER_WWN")
 				each skill in skills.wwn
+					+makeSkill(skill, !!customSkills[skill], customSkills[skill])
+				.skill.skill-points
+					.display.flex-center
+						span(data-i18n="UNSPENT_SKILL_POINTS").name
+						span(name="attr_unspent_skill_points").level
+					.edit.flex-center
+						span(data-i18n="UNSPENT_SKILL_POINTS").name
+						input(type="number", min="0", value="0", name="attr_unspent_skill_points").level
+			.skills-cwn.skill-container(data-i18n-list="SKILL_ORDER_CWN")
+				each skill in skills.cwn
 					+makeSkill(skill, !!customSkills[skill], customSkills[skill])
 				.skill.skill-points
 					.display.flex-center
